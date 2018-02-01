@@ -1,4 +1,5 @@
-import requests, urllib.parse
+import requests
+import urllib.parse
 
 
 class CharacterFetcher:
@@ -33,7 +34,6 @@ class CharacterFetcher:
     def get_character(self, character_id):
         id_prefix = '4005'
         # character_id = '-'.join(id_prefix, character_id)
-
 
 
 def main():
