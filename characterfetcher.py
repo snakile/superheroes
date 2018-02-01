@@ -38,7 +38,7 @@ class CharacterFetcher:
         name = character_json['name']
         gender = 'male' if character_json['gender'] == 1 else 'female'
         origin = character_json['origin']['name']
-        powers = ['one', 'two', 'three']
+        powers = [power['name'] for power in character_json['powers']]
         return Character(name, gender, origin, powers)
 
 

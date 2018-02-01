@@ -9,4 +9,4 @@ class Character:
         return self.__str__()
 
     def __str__(self):
-        return 'name: {}, gender: {}, origin: {} \n powers: {}'.format(self.name, self.gender, self.origin, self.powers)
+        return 'name: {}, gender: {}, origin: {}\npowers: {}'.format(self.name, self.gender, self.origin, self.powers)
