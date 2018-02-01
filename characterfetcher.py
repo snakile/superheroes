@@ -1,7 +1,7 @@
 import requests
 
 
-class Fetcher:
+class CharacterFetcher:
     def __init__(self):
         self.url = 'https://comicvine.gamespot.com/api/characters'
         self.base_params = {'api_key': '969a888c5b1043890fb27bbf267ace9d4d7e0fd8', 'format': 'json'}
@@ -16,7 +16,7 @@ class Fetcher:
 def main():
     params = {'field_list': 'gender,name,powers,origin,id',
               'limit': '2'}
-    data = Fetcher().fetch(params)
+    data = CharacterFetcher().fetch(params)
     print(data['results'][0]['name'])
 
 
