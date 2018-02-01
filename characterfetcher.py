@@ -1,6 +1,8 @@
 import requests
 import urllib.parse
 
+from character import Character
+
 
 class CharacterFetcher:
     def __init__(self):
@@ -32,18 +34,20 @@ class CharacterFetcher:
     def get_character(self, character_id):
         id_prefix = '4005'
         character_id = '-'.join([id_prefix, character_id])
-        return self._fetch_single_character_api(character_id)
+        character_json = self._fetch_single_character_api(character_id)
+        name = character_json['name']
+        gender = 'male' if character_json['gender'] == 1 else 'female'
+        origin = character_json['origin']['name']
+        powers = ['one', 'two', 'three']
+        return Character(name, gender, origin, powers)
 
 
 def main():
     fetcher = CharacterFetcher()
     male_characters = fetcher.get_male_characters(10)
     print(list(male_characters))
-    character_json = fetcher.get_character('1264')
-    print(character_json['name'])
-    print(character_json['gender'])
-    print(character_json['origin']['name'])
-    print(character_json['powers'])
+    character = fetcher.get_character('1264')
+    print(character)
 
 
 if __name__ == '__main__':
