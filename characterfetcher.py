@@ -19,10 +19,9 @@ class CharacterFetcher:
         params = {**params, **default_params}
         return self._fetch('characters', params)
 
-    def _fetch_single_character_api(self, params, character_id):
+    def _fetch_single_character_api(self, character_id):
         character_field_list = ['name', 'gender', 'origin', 'powers']
-        default_params = {'field_list': ','.join(character_field_list)}
-        params = {**params, **default_params}
+        params = {'field_list': ','.join(character_field_list)}
         return self._fetch('character/{}'.format(character_id), params)
 
     def get_male_characters(self, n=100):
@@ -33,7 +32,7 @@ class CharacterFetcher:
     def get_character(self, character_id):
         id_prefix = '4005'
         character_id = '-'.join([id_prefix, character_id])
-        return self._fetch_single_character_api({}, character_id)
+        return self._fetch_single_character_api(character_id)
 
 
 def main():
