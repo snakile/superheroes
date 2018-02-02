@@ -3,7 +3,7 @@ from pony.orm import *
 
 class Character:
     db = Database()
-    db.bind(provider='sqlite', filename=':memory:')
+    db.bind(provider='sqlite', filename='database.sqlite', create_db=True)
 
     class CharacterEntity(db.Entity):
         name = Required(str)
