@@ -22,7 +22,14 @@ class Character:
     @db_session
     def save(self):
         powers = '|'.join(self.powers)
+        powers = 'No Powers' if not powers else powers
         return Character.CharacterEntity(name=self.name, gender=self.gender, origin=self.origin, powers=powers)
+
+    @staticmethod
+    def show_all_characters():
+        with db_session:
+            query = select(character for character in Character.CharacterEntity)
+            query.show()
 
     def __repr__(self):
         return self.__str__()
@@ -35,11 +42,11 @@ def main():
     powers = ['Flight', 'Force Field', 'Magnetism', 'Gadgets', 'Electronic interaction', 'Power Item', 'Leadership']
     cosmic_boy = Character(name='Cosmic Boy', gender='male', origin='Alien', powers=powers)
     cosmic_girl = Character(name='Cosmic Girl', gender='female', origin='Female Alien', powers=powers[:3])
+    powerless = Character(name='John Smith', gender='male', origin='Human', powers=[])
     cosmic_boy.save()
     cosmic_girl.save()
-    with db_session:
-        query = select(character for character in Character.CharacterEntity)
-        query.show()
+    powerless.save()
+    Character.show_all_characters()
 
 
 if __name__ == '__main__':
