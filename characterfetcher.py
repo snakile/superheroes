@@ -26,8 +26,8 @@ class CharacterFetcher:
         params = {'field_list': ','.join(character_field_list)}
         return self._fetch('character/{}'.format(character_id), params)
 
-    def get_male_characters(self, n=100):
-        params = {'filter': 'gender:1', 'limit': str(n)}
+    def get_male_characters(self, offset=1, n=100):
+        params = {'filter': 'gender:1', 'limit': str(n), 'offset': str(offset)}
         results = self._fetch_characters_api(params)
         return (result['id'] for result in results)
 
