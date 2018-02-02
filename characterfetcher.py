@@ -31,6 +31,11 @@ class CharacterFetcher:
         results = self._fetch_characters_api(params)
         return (result['id'] for result in results)
 
+    def get_female_characters(self, offset=1, n=100):
+        params = {'filter': 'gender:2', 'limit': str(n), 'offset': str(offset)}
+        results = self._fetch_characters_api(params)
+        return (result['id'] for result in results)
+
     def get_character(self, character_id):
         id_prefix = '4005'
         character_id = '-'.join([id_prefix, character_id])
