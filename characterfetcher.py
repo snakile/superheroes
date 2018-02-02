@@ -42,7 +42,8 @@ class CharacterFetcher:
         character_json = self._fetch_single_character_api(character_id)
         name = character_json['name']
         gender = 'male' if character_json['gender'] == 1 else 'female'
-        origin = character_json['origin']['name']
+        origin_entry = character_json['origin']
+        origin = 'No Origin' if not origin_entry else origin_entry['name']
         powers = [power['name'] for power in character_json['powers']]
         return Character(name, gender, origin, powers)
 
@@ -51,12 +52,14 @@ class CharacterFetcher:
         female_characters = self.get_female_characters(offset=offset, limit=num_females)
         for character_id in chain(male_characters, female_characters):
             character = self.get_character(character_id)
+            print(character_id)
+            print(character)
             character.save()
 
 
 def main():
     fetcher = CharacterFetcher()
-    fetcher.download_characters(num_males=3, num_females=3, offset=100)
+    fetcher.download_characters(num_males=10, num_females=10, offset=160)
     Character.show_all_characters()
 
 

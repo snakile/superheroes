@@ -14,9 +14,9 @@ class Character:
     db.generate_mapping(create_tables=True)
 
     def __init__(self, name, gender, origin, powers):
-        self.name = name
-        self.gender = gender
-        self.origin = origin
+        self.name = name if name else 'No Name'
+        self.gender = gender if gender else 'No Gender'
+        self.origin = origin if origin else 'No Origin'
         self.powers = powers
 
     @db_session
@@ -51,3 +51,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+    # with db_session:
+    #     delete(character for character in Character.CharacterEntity if character.name == 'Kroosh')
+    #     Character.show_all_characters()
