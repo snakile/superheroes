@@ -59,7 +59,9 @@ class CharacterFetcher:
 
 def main():
     fetcher = CharacterFetcher()
-    fetcher.download_characters(num_males=10, num_females=10, offset=160)
+    offsets = [20, 150, 300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 2000, 2300, 2500, 3000]
+    for offset in offsets:
+        fetcher.download_characters(num_males=100, num_females=100, offset=offset)
     Character.show_all_characters()
 
 
