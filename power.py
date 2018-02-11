@@ -28,7 +28,7 @@ class Power:
         return Power.PowerEntity(name=self.name, characters=characters, numFemales=num_females, numMales=num_males)
 
     @staticmethod
-    def show_all_characters():
+    def show_all_powers():
         with db_session:
             query = select(power for power in Power.PowerEntity)
             query.show()
