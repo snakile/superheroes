@@ -15,24 +15,26 @@ class Power:
 
     def __init__(self, name):
         self.name = name if name else 'No Name'
+        self.characters = []
 
-    def add_character(self):
+    def add_character(self, character):
         self.characters.insert(character)
 
     @db_session
     def save(self):
-        powers = '|'.join(self.powers)
-        powers = 'No Powers' if not powers else powers
-        return Character.CharacterEntity(name=self.name, gender=self.gender, origin=self.origin, powers=powers)
+        characters = '|'.join(f"{character.name} ({character.gender})" for character in self.characters)
+        num_females = sum(character.gender == 'female' for character in self.characters)
+        num_males = len(characters) - num_females
+        return Power.PowerEntity(name=self.name, characters=characters, numFemales=num_females, numMales=num_males)
 
     @staticmethod
     def show_all_characters():
         with db_session:
-            query = select(character for character in Character.CharacterEntity)
+            query = select(power for power in Power.PowerEntity)
             query.show()
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return 'name: {}, gender: {}, origin: {}\npowers: {}'.format(self.name, self.gender, self.origin, self.powers)
+        return f"{self.name}:\n{self.characters}"
