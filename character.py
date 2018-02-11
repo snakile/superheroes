@@ -19,6 +19,10 @@ class Character:
         self.origin = origin if origin else 'No Origin'
         self.powers = powers
 
+    @staticmethod
+    def create_character(character_entity):
+        return Character(character_entity.name, character_entity.gender, character_entity.origin, character_entity.powers)
+
     @db_session
     def save(self):
         powers = '|'.join(self.powers)
